@@ -36,7 +36,7 @@ int main(int argc, char** argv) {
             std::putchar(arr[i]);
             break;
         case ',':
-            std::cerr << "Not implemented, sorry!" << std::endl;
+            std::cin >> arr[i];
             break;
 
         case '[':
