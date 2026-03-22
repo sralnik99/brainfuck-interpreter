@@ -44,7 +44,7 @@ int main(int argc, char** argv) {
             break;
         case ']':
             std::cerr << "Not implemented, sorry!" << std::endl;
-            break;
+            break; //idk how to implement this, anybody who reads this, help please!!!!!!!!!!!
 
         default:
             break;
