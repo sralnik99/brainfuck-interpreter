@@ -1,6 +1,6 @@
 # brainfuck-interpreter on C++!!!!!
 
-i know that this is not fully brainfuck interpreter, and what?
+THIS IS FULLY BRAINFUCK INTERPRETER NOW!!!!!!
 
 # Quick start for linux!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ```console
