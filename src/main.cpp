@@ -1,50 +1,67 @@
 #include <iostream>
-#include <cstring>
 #include <fstream>
+#include <iterator>
+#include <vector>
 
 int main(int argc, char** argv) {
     if(argv[1] == NULL) {
         std::cout << "Enter a file please" << std::endl;
         return 1;
     }
+    std::fstream file(argv[1], std::ios::in);
 
-    std::ifstream file(argv[1]);
-    std::string str;
+    std::istreambuf_iterator<char> fstart(file), fend;
+    std::vector<unsigned char> ctape(fstart, fend);
+    file.close();
     
-    char arr[30000];
-    std::memset(arr,0,sizeof(arr));
+    std::vector<unsigned char> arrtape(30000, 0);
 
-    char c;
-    int i = 0;
+    std::vector<unsigned char>::iterator c = ctape.begin();
+    std::vector<unsigned char>::iterator i = arrtape.begin();
 
-    while(file.get(c)) {
-        switch (c)
+    int b = 0;
+
+    for(; c != ctape.end(); ++c) {
+        switch (*c)
         {
         case '>':
-            i++;
+            ++i;
             break;
         case '<':
-            i--;
+            --i;
             break;
         case '+':
-            arr[i]++;
+            ++*i;
             break;
         case '-':
-            arr[i]--;
+            --*i;
             break;
         case '.':
-            std::putchar(arr[i]);
+            std::cout << *i;
             break;
         case ',':
-            std::cin >> arr[i];
+            std::cin >> *i;
             break;
 
         case '[':
-            std::cerr << "Not implemented, sorry!" << std::endl;
+            if(*i) continue;
+            ++b;
+            while(b)
+                switch(*++c) {
+                    case '[': ++b; break;
+                    case ']': --b; break;
+                }
             break;
         case ']':
-            std::cerr << "Not implemented, sorry!" << std::endl;
-            break; //idk how to implement this, anybody who reads this, help please!!!!!!!!!!!
+            if(!*i) continue;
+            ++b;
+            while(b)
+                switch(*--c) {
+                    case '[': --b; break;
+                    case ']': ++b; break;
+                }
+            c--;
+            break; 
 
         default:
             break;
